@@ -9,6 +9,8 @@
 
 Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
+SSD1306::SSD1306();
+
 bool SSD1306::init(){
   return display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
 }

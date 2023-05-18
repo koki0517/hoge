@@ -17,6 +17,8 @@ extern bool loss_display = false;
 
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
 
+BNO055::BNO055();
+
 bool BNO055::init(){
   bool isSuccess = bno.begin();
   bno.setExtCrystalUse(true);
