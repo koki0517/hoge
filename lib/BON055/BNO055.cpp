@@ -15,7 +15,7 @@ extern int bno_z;
 
 extern bool loss_display = false;
 
-Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28);
+Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire1);
 
 BNO055::BNO055();
 

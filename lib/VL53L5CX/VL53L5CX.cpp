@@ -12,19 +12,19 @@ VL53L5CX::VL53L5CX(){
 
 bool VL53L5CX::init(){
   while (Serial.available())Serial1.read(); // 受信バッファのお掃除
-  Serial1.write(0x01);
+  Serial1.write(0x01); // スタート信号
   bool result = true;
   unsigned long start_time = millis();
   while (!Serial.available()){ // データ第一弾が届くまで待つのだ
     ::vTaskDelay(pdMS_TO_TICKS(100)); // タイムアウト的な機能で100msだけ待ってあげる
     result = false;
     break;
-  } 
+  }
   return result;
 }
 
 bool VL53L5CX::stop(){
-  Serial1.write(0x04);
+  Serial1.write(0x04); // ストップ信号
 }
 
 void VL53L5CX::get_lidar(){

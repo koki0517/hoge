@@ -7,9 +7,11 @@
 #include "SSD1306.h"
 #include "VL53L5CX.h"
 
-BNO055 bno;
+BNO055 gyro;
 SSD1306 display;
 VL53L5CX lidar;
+
+int8_t refrector_pin[] = {}; // 最低でも4個いるよね
 
 static void task1(void*) {
   while (1) {
@@ -23,9 +25,8 @@ static void task2(void*) {
 
 FLASHMEM __attribute__((noinline)) void setup() {
   Serial.begin(115200);
-  Wire.begin();
 
-  if (!bno.init()){
+  if (!gyro.init()){
     // BNO055が見つかんなかったYO 
   }
 
@@ -37,10 +38,10 @@ FLASHMEM __attribute__((noinline)) void setup() {
     // xiaoが見つかんなかったYO
   }
 
-  ::xTaskCreate(task1, "task1", 128, nullptr, 2, nullptr);
-  ::xTaskCreate(task2, "task2", 128, nullptr, 2, nullptr);
-
+  // RTOSの設定
+  ::xTaskCreate(task1, "task1", 2048, nullptr, 2, nullptr);
+  ::xTaskCreate(task2, "task2", 2048, nullptr, 2, nullptr);
   ::vTaskStartScheduler();
 }
 
-void loop(){} // いっとしゅっどびぃえんぷてぃ
+void loop(){} // nothing to do is here

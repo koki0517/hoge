@@ -1,6 +1,7 @@
 #pragma once
 
-extern bool loss_display = false;
+extern bool display_alive = true;
+extern int8_t buttons[] = {0,0,0};
 
 class SSD1306 {
 public:
