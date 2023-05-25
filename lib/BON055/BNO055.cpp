@@ -9,9 +9,9 @@
 #include <utility/imumaths.h>
 #include "BNO055.h"
 
-extern int bno_x;
-extern int bno_y;
-extern int bno_z;
+extern int16_t bno_x;
+extern int16_t bno_y;
+extern int16_t bno_z;
 
 extern bool loss_display = false;
 
@@ -26,14 +26,14 @@ bool BNO055::init(){
   return isSuccess;
 }
 
-void BNO055::get_xyz(){
+void BNO055::get_xyz(int16_t* bno_x,int16_t* bno_y,int16_t* bno_z){
   /* Get a new sensor event */
   sensors_event_t event;
   bno.getEvent(&event);
   
-  bno_x = (float)event.orientation.x;
-  bno_y = (float)event.orientation.y;
-  bno_z = (float)event.orientation.z;
+  *bno_x = (float)event.orientation.x;
+  *bno_y = (float)event.orientation.y;
+  *bno_z = (float)event.orientation.z;
 
   Serial.print("Orientation: ");
   Serial.print(bno_x);
