@@ -8,4 +8,4 @@ public:
   bool init();
   void get_lidar();
   bool stop();
-}
+};

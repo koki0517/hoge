@@ -9,10 +9,6 @@
 #include <utility/imumaths.h>
 #include "BNO055.h"
 
-extern int16_t bno_x;
-extern int16_t bno_y;
-extern int16_t bno_z;
-
 extern bool loss_display = false;
 
 Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire1);
@@ -26,7 +22,7 @@ bool BNO055::init(){
   return isSuccess;
 }
 
-void BNO055::get_xyz(int16_t* bno_x,int16_t* bno_y,int16_t* bno_z){
+void BNO055::get_xyz(float* bno_x,float* bno_y,float* bno_z){
   /* Get a new sensor event */
   sensors_event_t event;
   bno.getEvent(&event);
@@ -35,13 +31,13 @@ void BNO055::get_xyz(int16_t* bno_x,int16_t* bno_y,int16_t* bno_z){
   *bno_y = (float)event.orientation.y;
   *bno_z = (float)event.orientation.z;
 
-  Serial.print("Orientation: ");
-  Serial.print(bno_x);
-  Serial.print(" ");
-  Serial.print(bno_y);
-  Serial.print(" ");
-  Serial.print(bno_z);
-  Serial.println();
+  // Serial.print("Orientation: ");
+  // Serial.print(bno_x);
+  // Serial.print(" ");
+  // Serial.print(bno_y);
+  // Serial.print(" ");
+  // Serial.print(bno_z);
+  // Serial.println();
 
   ::vTaskDelay(pdMS_TO_TICKS(20));
 }
